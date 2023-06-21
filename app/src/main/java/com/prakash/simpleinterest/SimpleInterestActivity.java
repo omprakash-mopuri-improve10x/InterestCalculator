@@ -1,10 +1,12 @@
 package com.prakash.simpleinterest;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -16,6 +18,8 @@ import com.prakash.simpleinterest.databinding.ActivitySimpleInterestBinding;
 import java.text.DateFormat;
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -23,6 +27,7 @@ public class SimpleInterestActivity extends AppCompatActivity {
 
     private ActivitySimpleInterestBinding binding;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,29 +45,37 @@ public class SimpleInterestActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void handleCalculate() {
         binding.calculateBtn.setOnClickListener(view -> {
            findSimpleInterest();
         });
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void findSimpleInterest() {
         String amountStr = binding.amountTxt.getText().toString();
-        int amount = Integer.valueOf(amountStr);
         String interestRateStr = binding.interestRateTxt.getText().toString();
-        int interestRate = Integer.valueOf(interestRateStr);
-        //String numberOfMonthsStr = binding.numberOfMonthsTxt.getText().toString();
-        //int numberOfMonths = Integer.valueOf(numberOfMonthsStr);
-        //int calculate = amount * interestRate * numberOfMonths / 100;
-        //String calculateStr = String.valueOf(calculate);
-        //Toast.makeText(this, calculateStr, Toast.LENGTH_SHORT).show();
+        String fromDate = binding.fromDateCalendarTxt.getText().toString();
+        String toDate = binding.toDateCalendarTxt.getText().toString();
+        if (amountStr.equals("") == false && interestRateStr.equals("") == false && fromDate.equals("") == false && toDate.equals("") == false) {
+            int amount = Integer.parseInt(amountStr);
+            int interestRate = Integer.parseInt(interestRateStr);
+            long numberOfDays = DateUtils.getDiffDays(fromDate, toDate);
+            long calculate = amount * interestRate / 100 * numberOfDays / 30;
+            String calculateStr = String.valueOf(calculate);
+            Toast.makeText(this, calculateStr, Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Fill the details", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void handleClear() {
         binding.clearBtn.setOnClickListener(view -> {
             binding.amountTxt.setText("");
             binding.interestRateTxt.setText("");
-           // binding.numberOfMonthsTxt.setText("");
+            binding.fromDateCalendarTxt.setText("");
+            binding.toDateCalendarTxt.setText("");
         });
     }
 
@@ -74,7 +87,7 @@ public class SimpleInterestActivity extends AppCompatActivity {
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         // Update the selected date in the Calendar instance
                         calendar.set(year, month, dayOfMonth);
-                        editText.setText(year + " " + month + " " + dayOfMonth);
+                        editText.setText(dayOfMonth + "-" + month + "-" +year);
                     }
                 },
                 calendar.get(Calendar.YEAR),
