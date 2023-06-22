@@ -20,7 +20,7 @@ public class DateUtils {
         long monthsDifference = ChronoUnit.MONTHS.between(localDate2, localDate1);
         localDate2 = localDate2.plusMonths(monthsDifference);
         long daysDifference = ChronoUnit.DAYS.between(localDate2, localDate1);
-        String dateFormat = Math.abs(yearsDifference) + " years " + Math.abs(monthsDifference) + " months " + Math.abs(daysDifference) + " days";
+        String dateFormat = Math.abs(yearsDifference) + " y " + Math.abs(monthsDifference) + " m " + Math.abs(daysDifference) + " d";
         return dateFormat;
     }
 

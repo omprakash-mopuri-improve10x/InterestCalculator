@@ -8,6 +8,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -59,12 +60,14 @@ public class SimpleInterestActivity extends AppCompatActivity {
         String fromDate = binding.fromDateCalendarTxt.getText().toString();
         String toDate = binding.toDateCalendarTxt.getText().toString();
         if (amountStr.equals("") == false && interestRateStr.equals("") == false && fromDate.equals("") == false && toDate.equals("") == false) {
-            int amount = Integer.parseInt(amountStr);
-            int interestRate = Integer.parseInt(interestRateStr);
+            long amount = Integer.parseInt(amountStr);
+            long interestRate = Integer.parseInt(interestRateStr);
             long numberOfDays = DateUtils.getDiffDays(fromDate, toDate);
-            long calculate = amount * interestRate / 100 * numberOfDays / 30;
-            String calculateStr = String.valueOf(calculate);
-            Toast.makeText(this, calculateStr, Toast.LENGTH_SHORT).show();
+            long interestAmount = amount * interestRate / 100 * numberOfDays / 30;
+            long totalAmount = amount + interestAmount;
+            Toast.makeText(this, String.valueOf(interestAmount), Toast.LENGTH_SHORT).show();
+            binding.resultsLayout.setVisibility(View.VISIBLE);
+            setData(fromDate, toDate, amount, interestAmount, totalAmount);
         } else {
             Toast.makeText(this, "Fill the details", Toast.LENGTH_SHORT).show();
         }
@@ -76,6 +79,7 @@ public class SimpleInterestActivity extends AppCompatActivity {
             binding.interestRateTxt.setText("");
             binding.fromDateCalendarTxt.setText("");
             binding.toDateCalendarTxt.setText("");
+            binding.resultsLayout.setVisibility(View.INVISIBLE);
         });
     }
 
@@ -107,5 +111,13 @@ public class SimpleInterestActivity extends AppCompatActivity {
         binding.toDateCalendarIb.setOnClickListener(view -> {
             showDatePickerDialog(binding.toDateCalendarTxt, "Select to date");
         });
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void setData(String fromDate, String toDate, long principleAmount, long interestAmount, long totalAmount) {
+        binding.totalTimeTxt.setText(DateUtils.getDiffDate(fromDate, toDate));
+        binding.principleAmountTxt.setText(String.valueOf(principleAmount));
+        binding.interestAmountTxt.setText(String.valueOf(interestAmount));
+        binding.totalAmountTxt.setText(String.valueOf(totalAmount));
     }
 }
