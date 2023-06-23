@@ -22,7 +22,7 @@
             android:id="@+id/amount_txt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Amount"
+            android:hint="@string/amount"
             android:inputType="number" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -42,7 +42,7 @@
             android:id="@+id/interest_rate_txt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Interest Rate"
+            android:hint="@string/interest_rate"
             android:inputType="number" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -62,7 +62,7 @@
             android:id="@+id/from_date_calendar_txt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="From Date"
+            android:hint="@string/from_date"
             android:inputType="number" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -83,7 +83,7 @@
             android:id="@+id/to_date_calendar_txt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="To Date"
+            android:hint="@string/to_date"
             android:inputType="number" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -92,7 +92,7 @@
         android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
-        android:text="Clear"
+        android:text="@string/clear_btn_txt"
         android:textAllCaps="false"
         app:layout_constraintEnd_toStartOf="@+id/calculate_btn"
         app:layout_constraintHorizontal_bias="0.5"
@@ -104,7 +104,7 @@
         android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
-        android:text="Calculate"
+        android:text="@string/calculate_btn_text"
         android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -140,7 +140,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:padding="24dp"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/calculate_btn">
@@ -150,7 +150,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:padding="4dp"
-            android:text="Total amount is"
+            android:text="@string/total_time"
             app:layout_constraintEnd_toStartOf="@+id/total_time_txt"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
@@ -173,7 +173,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:padding="4dp"
-            android:text="Principle amount is"
+            android:text="@string/principle_amount"
             app:layout_constraintEnd_toStartOf="@+id/principle_amount_txt"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -195,7 +195,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:padding="4dp"
-            android:text="Interest amount is"
+            android:text="@string/interest_amount"
             app:layout_constraintEnd_toStartOf="@+id/interest_amount_txt"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -217,7 +217,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:padding="4dp"
-            android:text="Total amount is"
+            android:text="@string/total_amount"
             app:layout_constraintEnd_toStartOf="@+id/total_amount_txt"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
